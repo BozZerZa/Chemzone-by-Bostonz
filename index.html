@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChemZone</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>ChemZone by Bostonz</h1>
+  <p>ประเมินพื้นที่เสี่ยงสารเคมีรั่วไหลแบบเริ่ดเพื่ออาจารย์เอกราช</p>
+
+  <label>สารเคมี</label>
+  <select id="chem"></select>
+
+  <label>อัตราการรั่ว (กก./นาที)</label>
+  <input id="rate" type="number" value="50">
+
+  <label>รั่วต่อเนื่องนาน (นาที)</label>
+  <input id="dur" type="number" min="1" value="30">
+
+  <label>ความเร็วลม (ม./วินาที)</label>
+  <input id="wind" type="number" value="3">
+
+  <label>ลมพัดมาจากทิศ (องศา)</label>
+  <input id="dir" type="number" value="225">
+
+  <label>สภาพอากาศ</label>
+  <select id="sky">
+    <option value="d1">กลางวัน แดดจัด</option>
+    <option value="d2" selected>กลางวัน แดดปานกลาง</option>
+    <option value="d3">กลางวัน แดดอ่อน/มีเมฆ</option>
+    <option value="n1">กลางคืน เมฆมาก</option>
+    <option value="n2">กลางคืน ท้องฟ้าโปร่ง</option>
+  </select>
+
+  <button id="lock" class="lockbtn">🔒 ล็อกพื้นที่กระจายสาร</button>
+  <div id="lockMsg" class="lockmsg"></div>
+
+  <label>คลิกบนแผนที่เพื่อ</label>
+  <select id="mode">
+    <option value="src">ตั้งจุดรั่ว</option>
+    <option value="point">เลือกจุดประเมินผลกระทบ</option>
+    <option value="school">เพิ่มโรงเรียน</option>
+    <option value="hospital">เพิ่มโรงพยาบาล</option>
+    <option value="community">เพิ่มชุมชน</option>
+  </select>
+
+  <button id="locate">📍 ใช้ตำแหน่งปัจจุบัน</button>
+  <label style="display:flex;gap:8px;align-items:center;margin-top:8px">
+    <input id="useAsSrc" type="checkbox" style="width:auto"> ตั้งตำแหน่งนี้เป็นจุดรั่วด้วย
+  </label>
+
+  <label style="display:flex;gap:8px;align-items:center;margin-top:12px">
+    <input id="showHeat" type="checkbox" style="width:auto" checked> แสดงภาพความเข้มข้นของสาร
+  </label>
+  <label>เวลาหลังรั่ว: <b id="tLabel">60</b> นาที</label>
+  <input id="tSlider" type="range" min="1" max="120" value="60">
+  <button id="play">▶ เล่นภาพการแพร่กระจาย</button>
+  <div class="legend"><span>ความเข้มข้นต่ำ</span><i></i><span>สูง</span></div>
+
+  <div id="map"></div>
+  <div id="targets"></div>
+  <div id="result"></div>
+  <div id="sites"></div>
+  <div id="info"></div>
+  <p class="note">ต้นแบบเพื่อการเรียนรู้/วางแผน ใช้แบบจำลอง Gaussian plume อย่างง่าย ค่าเกณฑ์เป็นค่าตัวอย่าง ต้องตรวจกับ AEGL/NIOSH และผู้เชี่ยวชาญก่อนใช้จริง ห้ามใช้ตัดสินใจในเหตุฉุกเฉิน</p>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
